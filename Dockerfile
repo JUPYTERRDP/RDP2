@@ -1,8 +1,9 @@
 # Use an official Ubuntu as a base image
 FROM ubuntu:latest
 
-# Install Chrome Remote Desktop dependencies
+# Install necessary packages for Chrome Remote Desktop
 RUN apt-get update && apt-get install -y \
+    sudo \
     wget \
     gnupg \
     ca-certificates \
@@ -10,7 +11,8 @@ RUN apt-get update && apt-get install -y \
     desktop-file-utils \
     xdg-utils \
     dbus-x11 \
-    --no-install-recommends
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Chrome Browser and Chrome Remote Desktop
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
@@ -25,8 +27,8 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
 
 # Set up Chrome Remote Desktop
 RUN useradd -m user \
-    && usermod -aG sudo user \
     && echo "user:password" | chpasswd \
+    && usermod -aG sudo user \
     && usermod -s /bin/bash user \
     && usermod -aG chrome-remote-desktop user \
     && mkdir -p /home/user/.config/chrome-remote-desktop \
