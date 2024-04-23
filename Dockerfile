@@ -32,9 +32,9 @@ RUN useradd -m user \
     && usermod -s /bin/bash user \
     && usermod -aG chrome-remote-desktop user \
     && mkdir -p /home/user/.config/chrome-remote-desktop \
-    && touch /home/user/.config/chrome-remote-desktop/host#RANDOMSTRINGHERE \
+    && touch /home/user/.config/chrome-remote-desktop/host#70f0e30f277ff88e0edf5fc5e82244ca.json \
     && chown -R user:user /home/user \
-    && chmod 777 /home/user/.config/chrome-remote-desktop/host#RANDOMSTRINGHERE
+    && chmod 777 /home/user/.config/chrome-remote-desktop/host#70f0e30f277ff88e0edf5fc5e82244ca.json
 
 # Expose necessary ports for Chrome Remote Desktop
 EXPOSE 5900
