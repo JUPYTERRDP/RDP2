@@ -25,6 +25,10 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Adjust permissions
+RUN chmod -R 777 /home/user/.config/chrome-remote-desktop/
+RUN chown -R user:user /home/user/.config/chrome-remote-desktop/
+
 # Set up Chrome Remote Desktop
 RUN useradd -m user \
     && echo "user:password" | chpasswd \
@@ -32,9 +36,9 @@ RUN useradd -m user \
     && usermod -s /bin/bash user \
     && usermod -aG chrome-remote-desktop user \
     && mkdir -p /home/user/.config/chrome-remote-desktop \
-    && touch /home/user/.config/chrome-remote-desktop/host#70f0e30f277ff88e0edf5fc5e82244ca.json \
+    && touch /home/user/.config/chrome-remote-desktop/host#0dc702bb8f4f032768342408e7a2111d.json \
     && chown -R user:user /home/user \
-    && chmod 777 /home/user/.config/chrome-remote-desktop/host#70f0e30f277ff88e0edf5fc5e82244ca.json
+    && chmod 777 /home/user/.config/chrome-remote-desktop/host#0dc702bb8f4f032768342408e7a2111d.json
 
 # Expose necessary ports for Chrome Remote Desktop
 EXPOSE 5900
