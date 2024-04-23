@@ -38,4 +38,4 @@ EXPOSE 5900
 EXPOSE 22
 
 # Start Chrome Remote Desktop
-CMD ["sh", "-c", "DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AeaYSHDew4EfBLomMyRX115U35WZkKVtqvN1L5Onyx6YlotFZ3JfpSJPfW632d6-WAfG9A" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)"]
+CMD ["sh", "-c", "DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AeaYSHB4d5Qu0a25hL2HndWRD5jtcprI60wXkNnR_PQ5Q8PQ_5XepLMQoZnHnpdF1Ppqtg" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)"
