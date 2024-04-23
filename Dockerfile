@@ -17,10 +17,14 @@ RUN apt-get update && apt-get install -y \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
-# Add user to the docker group and set password
+# Add user to the sudo group and set password
 RUN useradd -m -s /bin/bash --uid $USER_ID user \
-    && usermod -aG sudo,docker user \
+    && usermod -aG sudo user \
     && echo "user:password" | chpasswd
+
+# Add user to the docker group if it exists
+RUN groupadd -g 999 docker || true \
+    && usermod -aG docker user
 
 # Set up Chrome Remote Desktop
 RUN mkdir -p /home/user/.config/chrome-remote-desktop \
