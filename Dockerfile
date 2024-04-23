@@ -35,8 +35,5 @@ WORKDIR /home/user
 EXPOSE 22
 EXPOSE 5900
 
-# Debugging: Print hostname and content of /etc/hosts for troubleshooting
-RUN hostname && cat /etc/hosts
-
 # Start Chrome Remote Desktop
 CMD ["sh", "-c", "DISPLAY= /opt/google/chrome-remote-desktop/start-host --code=4/0AeaYSHCwv_MT8geuCsro52oCxfVHWKUt1YMRf2EAFSe_txw-c4kMz8aEqj7WSZ9aeZgDZA --redirect-url=https://remotedesktop.google.com/_/oauthredirect --name=$(hostname) --user-name=user --pin=123456"]
