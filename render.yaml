@@ -5,4 +5,4 @@ services:
     env:
       - key: DISPLAY
         value: ""
-    startCommand: "sh -c 'DISPLAY= /opt/google/chrome-remote-desktop/start-host --code=4/0AeaYSHA89TfnQRCgm5BRclExSfYJhSGoGe-7dVDZCb0w07onqZuR6znHK0NBZsUOPV6d0A --redirect-url=https://remotedesktop.google.com/_/oauthredirect --name=$(hostname) --user-name=user --pin=123456'
+    startCommand: "sh -c 'DISPLAY= /opt/google/chrome-remote-desktop/start-host --code=4/0AeaYSHA89TfnQRCgm5BRclExSfYJhSGoGe-7dVDZCb0w07onqZuR6znHK0NBZsUOPV6d0A --redirect-url=https://remotedesktop.google.com/_/oauthredirect --name=$(hostname) --user-name=user --pin=123456'"
