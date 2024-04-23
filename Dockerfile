@@ -41,11 +41,12 @@ EXPOSE 5900
 EXPOSE 22
 
 # Troubleshooting steps:
-# 1. Check OAuth Configuration
-# 2. Verify Authorization Code
-# 3. Check Permissions
-# 4. Ensure Home Directory
-# 5. Retry Chrome Remote Desktop startup
+# 1. Update Chrome Remote Desktop
+# 2. Check for System Updates
+# 3. Review Docker Permissions
+# 4. Inspect Logs
+# 5. Try on a Different Environment
+# 6. Consult Chrome Remote Desktop Documentation
 
 # Start Chrome Remote Desktop
 CMD ["sh", "-c", "DISPLAY= /opt/google/chrome-remote-desktop/start-host --code=4/0AeaYSHCwv_MT8geuCsro52oCxfVHWKUt1YMRf2EAFSe_txw-c4kMz8aEqj7WSZ9aeZgDZA --redirect-url=https://remotedesktop.google.com/_/oauthredirect --name=$(hostname) --user-name=user --pin=123456"]
