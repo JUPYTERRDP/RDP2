@@ -50,8 +50,13 @@ RUN useradd -ms /bin/bash Albin && \
 # Set permissions for the user's home directory
 RUN chown -R Albin:Albin /home/Albin
 
+# Troubleshooting steps
+RUN ping -c 3 remotedesktop.google.com && \
+    ls -la /home/Albin/.config/chrome-remote-desktop/ && \
+    tail -n 100 /var/log/syslog
+
 # Provide authorization code during Docker image build
-RUN DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AeaYSHCQ_nJEfaUm9BBbZhFVVo2iATdxytRwjJRPbYoGEiYZ18K-mNRnKViHToO3hgSxKg" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --user-name="Albin" --pin="123456" --name=$(hostname)
+RUN DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AeaYSHDXW7s_uExaeFz0Q0hiaToo9zFzW_gp8mYaw1av4Nm9Tv2t4bNFaRXI44ljmCcNAA" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --user-name="Albin" --pin="123456" --name=$(hostname)
 
 # Expose the RDP port
 EXPOSE 3389
