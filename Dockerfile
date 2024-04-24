@@ -1,6 +1,14 @@
 # Use a base image
 FROM ubuntu:latest
 
+# Set noninteractive mode and specify the keyboard layout
+ENV DEBIAN_FRONTEND=noninteractive
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
+RUN apt-get update && apt-get install -y locales && \
+    locale-gen en_US.UTF-8
+
 # Install Chrome Remote Desktop dependencies
 RUN apt-get update && apt-get install -y \
     wget \
