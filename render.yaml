@@ -1,5 +1,9 @@
 services:
-  - name: chrome-remote-desktop
-    env: docker
-    buildCommand: docker build -t chrome-remote-desktop .
-    startCommand: docker run -e CHROME_REMOTE_DESKTOP_PIN=123456 chrome-remote-desktop
+  - type: docker
+    name: my-remote-desktop
+    dockerfile: Dockerfile
+    env:
+      - CHROME_REMOTE_DESKTOP_DEFAULT_DESKTOP_SIZES=1920x1080
+    github:
+      repo: Albin/RDP2
+      branch: main
