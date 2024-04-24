@@ -9,9 +9,11 @@ ENV LC_ALL=en_US.UTF-8
 RUN apt-get update && apt-get install -y locales && \
     locale-gen en_US.UTF-8
 
-# Install necessary dependencies
-RUN apt-get update && apt-get install -y \
-    locales \
+# Update package lists
+RUN apt-get update
+
+# Install Chrome Remote Desktop dependencies
+RUN apt-get install -y \
     wget \
     gdebi \
     xvfb \
@@ -32,19 +34,18 @@ RUN apt-get update && apt-get install -y \
     libutempter0 \
     xserver-xorg-video-dummy
 
-# Create a new user "Albin" with sudo privileges
-RUN useradd -m Albin && echo "Albin:Albin4242" | chpasswd && adduser Albin sudo
-
-# Switch to the new user
-USER Albin
-
-# Download and install Chrome Remote Desktop
+# Download Chrome Remote Desktop package and install
 RUN wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb && \
-    sudo dpkg -i chrome-remote-desktop_current_amd64.deb && \
-    sudo apt-get install -f -y
-    
+    dpkg -i chrome-remote-desktop_current_amd64.deb && \
+    apt-get install -f -y
+
+# Cleanup downloaded package
+RUN rm chrome-remote-desktop_current_amd64.deb
+
+# Create user account "Albin" with password "Albin4242"
+RUN useradd -ms /bin/bash Albin && \
+    echo "Albin:Albin4242" | chpasswd && \
+    adduser Albin sudo
+
 # Set your start command with the specified user name and PIN
 CMD ["sh", "-c", "DISPLAY= /opt/google/chrome-remote-desktop/start-host --code=\"4/0AeaYSHCQ_nJEfaUm9BBbZhFVVo2iATdxytRwjJRPbYoGEiYZ18K-mNRnKViHToO3hgSxKg\" --redirect-url=\"https://remotedesktop.google.com/_/oauthredirect\" --user-name=\"Albin\" --pin=\"123456\" --name=$(hostname)"]
-
-# Expose port for Chrome Remote Desktop
-EXPOSE 3389
