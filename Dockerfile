@@ -9,11 +9,8 @@ ENV LC_ALL=en_US.UTF-8
 RUN apt-get update && apt-get install -y locales && \
     locale-gen en_US.UTF-8
 
-# Update package lists
-RUN apt-get update
-
-# Install Chrome Remote Desktop dependencies
-RUN apt-get install -y \
+# Install necessary packages and dependencies
+RUN apt-get update && apt-get install -y \
     wget \
     gdebi \
     xvfb \
@@ -32,36 +29,27 @@ RUN apt-get install -y \
     python3-psutil \
     python3-xdg \
     libutempter0 \
-    xserver-xorg-video-dummy
-
-# Download Chrome Remote Desktop package and install
-RUN wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb && \
-    dpkg -i chrome-remote-desktop_current_amd64.deb && \
-    apt-get install -f -y
-
-# Cleanup downloaded package
-RUN rm chrome-remote-desktop_current_amd64.deb
-
-# Create user account "Albin" with password "Albin4242"
-RUN useradd -ms /bin/bash Albin && \
-    echo "Albin:Albin4242" | chpasswd && \
-    adduser Albin sudo
-
-# Set permissions for the user's home directory
-RUN chown -R Albin:Albin /home/Albin
-
-# Create the directory for Chrome Remote Desktop config if it does not exist
-RUN mkdir -p /home/Albin/.config/chrome-remote-desktop/
+    xserver-xorg-video-dummy \
+    # Install Chrome Remote Desktop
+    && wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb \
+    && dpkg -i chrome-remote-desktop_current_amd64.deb \
+    && apt-get install -f -y \
+    # Create user account "Albin" and grant sudo permissions
+    && useradd -ms /bin/bash Albin \
+    && echo "Albin:Albin4242" | chpasswd \
+    && adduser Albin sudo \
+    # Change ownership of home directory to Albin
+    && chown -R Albin:Albin /home/Albin \
+    # Create necessary directory for Chrome Remote Desktop
+    && mkdir -p /home/Albin/.config/chrome-remote-desktop/
 
 # Check connectivity to a website
-RUN curl -IsS https://remotedesktop.google.com -o /dev/null && \
-    ls -la /home/Albin/.config/chrome-remote-desktop/
+RUN curl -IsS https://remotedesktop.google.com -o /dev/null \
+    && ls -la /home/Albin/.config/chrome-remote-desktop/ \
+    && tail -n 100 /var/log/syslog
 
 # Provide authorization code during Docker image build
-RUN DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AeaYSHA4OsGc4EJ7r7reAYhhlRFpHX6WFjcYY7C3t5cP9B-IYkqK167bRjatq-Ew3YeMwQ" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --user-name="Albin" --pin="123456" --name=$(hostname)
+RUN DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AeaYSHDXW7s_uExaeFz0Q0hiaToo9zFzW_gp8mYaw1av4Nm9Tv2t4bNFaRXI44ljmCcNAA" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --user-name="Albin" --pin="123456" --name=$(hostname)
 
 # Expose the RDP port
 EXPOSE 3389
-
-# Set the start command with the specified user name and PIN
-CMD ["sh", "-c", "DISPLAY= /opt/google/chrome-remote-desktop/start-host --user-name=\"Albin\" --pin=\"123456\" --name=$(hostname)\""]
