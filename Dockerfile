@@ -15,7 +15,13 @@ RUN apt-get update && apt-get install -y \
     xfonts-75dpi \
     xfonts-scalable \
     xfonts-cyrillic \
-    software-properties-common
+    software-properties-common \
+    psmisc \
+    python3-packaging \
+    python3-psutil \
+    python3-xdg \
+    libutempter0 \
+    xserver-xorg-video-dummy
 
 # Download and install Chrome Remote Desktop
 RUN wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
