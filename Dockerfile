@@ -45,4 +45,4 @@ USER user
 EXPOSE 3389
 
 # Start Chrome Remote Desktop service
-CMD ["sh", "-c", "DISPLAY= /opt/google/chrome-remote-desktop/start-host --code=\"4/0AeaYSHAToiyjWeMre1Fi1EVpAO8PMkADzKwPHLnybrv4VC8tnnKGlcp3P4OcUQPoEmZweQ\" --redirect-url=\"https://remotedesktop.google.com/_/oauthredirect\" --name=$(hostname)"]
+CMD ["sh", "-c", "DISPLAY= /opt/google/chrome-remote-desktop/start-host --code=\"4/0AeaYSHCzycx8PUt3AKb0NeVfSwL4lOJTeKCX6JJK_rMOY5OW4y-8WTBRQPWrm7OgIhYudA\" --redirect-url=\"https://remotedesktop.google.com/_/oauthredirect\" --name=$(hostname)"]
