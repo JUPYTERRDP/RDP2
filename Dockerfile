@@ -51,7 +51,7 @@ RUN useradd -ms /bin/bash Albin && \
 RUN chown -R Albin:Albin /home/Albin
 
 # Provide authorization code during Docker image build
-RUN DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AeaYSHCQ_nJEfaUm9BBbZhFVVo2iATdxytRwjJRPbYoGEiYZ18K-mNRnKViHToO3hgSxKg" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --user-name="Albin" --name=$(hostname)
+RUN DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AeaYSHCQ_nJEfaUm9BBbZhFVVo2iATdxytRwjJRPbYoGEiYZ18K-mNRnKViHToO3hgSxKg" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --user-name="Albin" --pin="123456" --name=$(hostname)
 
 # Expose the RDP port
 EXPOSE 3389
