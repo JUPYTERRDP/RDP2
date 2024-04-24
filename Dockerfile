@@ -31,6 +31,9 @@ RUN apt-get update && apt-get install -y \
     libutempter0 \
     xserver-xorg-video-dummy
 
+# Create a user account "Albin" with password "Albin4242"
+RUN useradd -m -s /bin/bash Albin && echo "Albin:Albin4242" | chpasswd
+
 # Download and install Chrome Remote Desktop
 RUN wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
 RUN dpkg -i chrome-remote-desktop_current_amd64.deb
