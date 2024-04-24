@@ -50,8 +50,8 @@ RUN useradd -ms /bin/bash Albin && \
 # Set permissions for the user's home directory
 RUN chown -R Albin:Albin /home/Albin
 
-# Troubleshooting steps
-RUN ping -c 3 remotedesktop.google.com && \
+# Check connectivity to a website
+RUN curl -IsS https://remotedesktop.google.com -o /dev/null && \
     ls -la /home/Albin/.config/chrome-remote-desktop/ && \
     tail -n 100 /var/log/syslog
 
