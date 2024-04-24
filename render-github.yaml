@@ -1,0 +1,7 @@
+integrations:
+  - type: github
+    name: my-github-integration
+    permissions:
+      - repo:read
+      - repo:status
+      - repo_deployment
