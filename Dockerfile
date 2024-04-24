@@ -31,18 +31,9 @@ RUN apt-get update && apt-get install -y \
     libutempter0 \
     xserver-xorg-video-dummy
 
-# Create a user account "Albin" with password "Albin4242"
-RUN useradd -m -s /bin/bash Albin && echo "Albin:Albin4242" | chpasswd
-
 # Download and install Chrome Remote Desktop
 RUN wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
 RUN dpkg -i chrome-remote-desktop_current_amd64.deb
 
-# Automatically provide the PIN "123456" during setup
-RUN echo "123456" | /opt/google/chrome-remote-desktop/start-host --code="4/0AeaYSHCQ_nJEfaUm9BBbZhFVVo2iATdxytRwjJRPbYoGEiYZ18K-mNRnKViHToO3hgSxKg" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --user-name="Albin" --name=$(hostname)
-
-# Expose port for Chrome Remote Desktop
-EXPOSE 3389
-
-# Start Chrome Remote Desktop service
-CMD ["sh", "-c", "DISPLAY= /opt/google/chrome-remote-desktop/start-host --code=\"4/0AeaYSHCQ_nJEfaUm9BBbZhFVVo2iATdxytRwjJRPbYoGEiYZ18K-mNRnKViHToO3hgSxKg\" --redirect-url=\"https://remotedesktop.google.com/_/oauthredirect\" --name=$(hostname) --pin=123456"]
+# Set your start command with the PIN "123456"
+CMD ["sh", "-c", "DISPLAY= /opt/google/chrome-remote-desktop/start-host --code=\"4/0AeaYSHCQ_nJEfaUm9BBbZhFVVo2iATdxytRwjJRPbYoGEiYZ18K-mNRnKViHToO3hgSxKg\" --redirect-url=\"https://remotedesktop.google.com/_/oauthredirect\" --pin=\"123456\" --name=$(hostname)"]
