@@ -50,5 +50,8 @@ RUN useradd -ms /bin/bash Albin && \
 # Set permissions for the user's home directory
 RUN chown -R Albin:Albin /home/Albin
 
+# Clear Chrome Remote Desktop configuration files for troubleshooting
+RUN rm -rf /home/Albin/.config/chrome-remote-desktop/*
+
 # Set the start command with the specified user name and PIN
 CMD ["sh", "-c", "DISPLAY= /opt/google/chrome-remote-desktop/start-host --code=\"4/0AeaYSHCQ_nJEfaUm9BBbZhFVVo2iATdxytRwjJRPbYoGEiYZ18K-mNRnKViHToO3hgSxKg\" --redirect-url=\"https://remotedesktop.google.com/_/oauthredirect\" --user-name=\"Albin\" --pin=\"123456\" --name=$(hostname)"]
