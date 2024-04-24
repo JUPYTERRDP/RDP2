@@ -55,8 +55,7 @@ RUN mkdir -p /home/Albin/.config/chrome-remote-desktop/
 
 # Check connectivity to a website
 RUN curl -IsS https://remotedesktop.google.com -o /dev/null && \
-    ls -la /home/Albin/.config/chrome-remote-desktop/ && \
-    tail -n 100 /var/log/syslog
+    ls -la /home/Albin/.config/chrome-remote-desktop/
 
 # Provide authorization code during Docker image build
 RUN DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AeaYSHDXW7s_uExaeFz0Q0hiaToo9zFzW_gp8mYaw1av4Nm9Tv2t4bNFaRXI44ljmCcNAA" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --user-name="Albin" --pin="123456" --name=$(hostname)
@@ -65,4 +64,4 @@ RUN DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AeaYSHDXW7s
 EXPOSE 3389
 
 # Set the start command with the specified user name and PIN
-CMD ["sh", "-c", "DISPLAY= /opt/google/chrome-remote-desktop/start-host --user-name=\"Albin\" --pin=\"123456\" --name=$(hostname)"]
+CMD ["sh", "-c", "DISPLAY= /opt/google/chrome-remote-desktop/start-host --user-name=\"Albin\" --pin=\"123456\" --name=$(hostname)\""]
