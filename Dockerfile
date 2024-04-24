@@ -1,26 +1,28 @@
-# Use an official Ubuntu as a base image
+# Use a base image
 FROM ubuntu:latest
 
-# Install necessary packages for Chrome Remote Desktop
+# Install Chrome Remote Desktop dependencies
 RUN apt-get update && apt-get install -y \
-    sudo \
     wget \
-    gnupg \
-    ca-certificates \
+    gdebi \
+    xvfb \
+    xbase-clients \
+    curl \
+    sudo \
     apt-transport-https \
-    desktop-file-utils \
-    xdg-utils \
     dbus-x11 \
-    --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
+    xfonts-100dpi \
+    xfonts-75dpi \
+    xfonts-scalable \
+    xfonts-cyrillic \
+    software-properties-common
 
-# Verify Chrome Remote Desktop Installation
-RUN apt-get update && apt-get install -y google-chrome-stable chrome-remote-desktop --no-install-recommends \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+# Download and install Chrome Remote Desktop
+RUN wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
+RUN dpkg -i chrome-remote-desktop_current_amd64.deb
 
-# Inspect Image Contents to Find start-host Script
-RUN find / -name start-host
+# Expose port for Chrome Remote Desktop
+EXPOSE 3389
 
-# Update Script Path in CMD (replace '/path/to/start-host' with the correct path)
-CMD ["sh", "-c", "/path/to/start-host --code=4/0AeaYSHCwv_MT8geuCsro52oCxfVHWKUt1YMRf2EAFSe_txw-c4kMz8aEqj7WSZ9aeZgDZA --redirect-url=https://remotedesktop.google.com/_/oauthredirect --name=$(hostname) --user-name=user --pin=123456"]
+# Start Chrome Remote Desktop service
+CMD ["sh", "-c", "DISPLAY= /opt/google/chrome-remote-desktop/start-host --code=\"4/0AeaYSHAToiyjWeMre1Fi1EVpAO8PMkADzKwPHLnybrv4VC8tnnKGlcp3P4OcUQPoEmZweQ\" --redirect-url=\"https://remotedesktop.google.com/_/oauthredirect\" --name=$(hostname)"]
