@@ -35,6 +35,12 @@ RUN apt-get update && apt-get install -y \
 RUN wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
 RUN dpkg -i chrome-remote-desktop_current_amd64.deb
 
+# Create a non-root user
+RUN useradd -ms /bin/bash user
+
+# Switch to the non-root user
+USER user
+
 # Expose port for Chrome Remote Desktop
 EXPOSE 3389
 
