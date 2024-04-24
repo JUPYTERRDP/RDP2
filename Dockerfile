@@ -36,7 +36,7 @@ RUN wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.
 RUN dpkg -i chrome-remote-desktop_current_amd64.deb
 
 # Automatically provide a PIN consisting of at least six digits
-RUN echo "123456" | /opt/google/chrome-remote-desktop/host-setup
+RUN echo "123456" | /opt/google/chrome-remote-desktop/start-host --code="4/0AeaYSHCzycx8PUt3AKb0NeVfSwL4lOJTeKCX6JJK_rMOY5OW4y-8WTBRQPWrm7OgIhYudA" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)
 
 # Expose port for Chrome Remote Desktop
 EXPOSE 3389
