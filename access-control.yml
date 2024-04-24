@@ -1,0 +1,9 @@
+accessControl:
+  - type: team
+    name: my-team
+    permissions:
+      - read
+      - write
+    members:
+      - user1
+      - user2
