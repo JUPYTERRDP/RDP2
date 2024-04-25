@@ -47,8 +47,13 @@ RUN apt-get update && apt-get install -y \
 RUN curl -IsS https://remotedesktop.google.com -o /dev/null \
     && ls -la /home/Albin/.config/chrome-remote-desktop/
 
-# Provide authorization code and PIN during Docker image build
-RUN DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AeaYSHA5s_KiN8uK0_6iUcEvRYWxvAg_k05Pw45rKHUckD-a7giygVR_JlrDMkNRCP7g8g" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --pin="123456" --name=$(hostname)
-
+# Provide authorization code during Docker image build
+RUN DISPLAY= /opt/google/chrome-remote-desktop/start-host \
+    --code="4/0AeaYSHA5s_KiN8uK0_6iUcEvRYWxvAg_k05Pw45rKHUckD-a7giygVR_JlrDMkNRCP7g8g" \
+    --redirect-url="https://remotedesktop.google.com/_/oauthredirect" \
+    --user-name="Albin" \
+    --pin="123456" \
+    --name=$(hostname)
+    
 # Expose the RDP port
 EXPOSE 3389
