@@ -7,8 +7,23 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install necessary packages
 RUN apt-get update && apt-get install -y \
     wget \
+    gdebi \
+    xvfb \
+    xbase-clients \
     curl \
-    gnupg \
+    apt-transport-https \
+    dbus-x11 \
+    xfonts-100dpi \
+    xfonts-75dpi \
+    xfonts-scalable \
+    xfonts-cyrillic \
+    software-properties-common \
+    psmisc \
+    python3-packaging \
+    python3-psutil \
+    python3-xdg \
+    libutempter0 \
+    xserver-xorg-video-dummy
     sudo \
     && rm -rf /var/lib/apt/lists/*
 
