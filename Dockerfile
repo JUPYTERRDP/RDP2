@@ -48,7 +48,7 @@ RUN curl -IsS https://remotedesktop.google.com -o /dev/null \
     && ls -la /home/Albin/.config/chrome-remote-desktop/
 
 # Provide authorization code during Docker image build
-RUN DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AeaYSHAlzSMfL4DhlLOevXvn0ljXOdAIv0TTJAreFPC_dobmAen4onujmqn7mOegqR3iwA" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --user-name="Albin" --pin="123456" --name=$(hostname)
+RUN DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AeaYSHDOvGePfKU3L6Anz68NlobJAOdU-9AmnHwikywzH0r97xAA2Smb5dwdBLTG6iEkCQ" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --user-name="Albin" --pin="123456" --name=$(hostname)
 
 # Expose the RDP port
 EXPOSE 3389
