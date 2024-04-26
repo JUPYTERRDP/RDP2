@@ -29,7 +29,8 @@ RUN apt-get update && apt-get install -y \
     libxdamage1 \
     libxext6 \
     libxfixes3 \
-    libxkbcommon0
+    libxkbcommon0 \
+    xvfb
 
 # Download Chrome Remote Desktop package
 RUN wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
