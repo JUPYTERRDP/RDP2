@@ -1,9 +1,6 @@
 services:
-  - type: docker
-    name: my-remote-desktop
+  - name: my-app
     dockerfile: Dockerfile
-    env:
-      - CHROME_REMOTE_DESKTOP_DEFAULT_DESKTOP_SIZES=1920x1080
     github:
       repo: Albin/RDP2
       branch: main
